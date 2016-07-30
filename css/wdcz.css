@@ -1,0 +1,35 @@
+﻿* {margin: 0;padding: 0;border: 0;list-style-type:none; }
+a,img{border:0;     text-decoration: none;}
+.ul, li{padding: 0px;margin: 0px;border-width: 0px;}
+body {
+}
+#logo{ width:100%; background-image:url('../image/wocztop1.png'); height:178px; background-repeat:repeat-x;}
+.tc{ color:Black; font-size:14px; font-family:@楷体;}
+/*导航ul*/
+.lava_with_image{position:relative; }
+.lava_with_image li{float:left;}
+.lava_with_image li a{float:left; font-weight:bold; color:white; font-size:14px; top:8px; margin:auto 10px; text-decoration:none; position:relative; z-index:3;}
+.lava_with_image li a:hover{text-decoration:none; color:white;}
+.lava_with_image li.back{height:30px; background:url(../image/lava_menu_bg.gif) no-repeat right -30px; position:absolute; z-index:2;}
+.lava_with_image li.back .left{height:100%; margin-right:9px; background:url(../image/lava_menu_bg.gif) no-repeat;}
+.zxx_test_list{width:720px; margin-top:100px; margin-left:auto; margin-right:auto;}
+.zxx_test_list{border-bottom:0; padding-bottom:40px;}
+/* 百叶窗banner */
+#slider-wrap{width:1000px; height:277px;}/*可以修改宽高*/
+#slider{position: relative; width:1000px; height:277px; background:#FFF;} /*可以修改宽高*/
+#slider img{position:absolute; top:0; left:0; display:none; width:1000px; height:277px;}/*可以修改宽高*/
+.nivoSlider{position:relative;overflow: hidden;}
+.nivoSlider img{position:absolute; top:0px; left:0px}
+.nivoSlider a.nivo-imageLink{position:absolute; top:0px;display:block;left:0px;width:1000px;height:277px;border:0;padding:0;margin:0;z-index:6;}/*可以修改宽高*/
+.nivo-slice {display:block;position:absolute;z-index:5;height:100%;}
+.nivo-box {display:block;position:absolute;z-index:5;}
+.nivo-caption{position:absolute; left:0; bottom:0; background: transparen;width:1000px; z-index:50; height: 277px; }/*可以修改宽高*/
+.nivo-caption p{width:1000px;height: 277px; text-indent: -9999px}/*可以修改宽高*/
+.nivo-controlNav{position:absolute; left:2%; bottom:10px; z-index: 100;}/*可以修改左右上下间距*/
+.nivo-controlNav a{position:relative; z-index:99; cursor:pointer;background:#074d91}
+.nivo-controlNav a.active{background:#ff6400;font-weight:bold}
+.nivo-controlNav a{display:block; color: #fff; width:30px; height:20px; line-height: 20px; text-align: center; margin-right:3px; float:left; overflow: hidden;}/*可以修改宽高*/
+.nivo-directionNav a {position:absolute;top:45%;z-index:9;cursor:pointer;}   /*左右切换按钮，不能删除，如果不需要可以设背景，删除会引起图片错位*/
+.nivo-directionNav a {display:block;width:30px;height:30px;text-indent:-9999px;border:0;}
+a.nivo-nextNav {right:15px;}
+a.nivo-prevNav {left:15px;}

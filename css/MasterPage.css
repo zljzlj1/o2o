@@ -1,0 +1,17 @@
+﻿
+* {margin: 0;padding: 0;border: 0;list-style-type:none; }
+a,img{border:0;     text-decoration: none;}
+.ul, li{padding: 0px;margin: 0px;border-width: 0px;}
+
+body {
+}
+.TxtUserName{ background-image:  url('../image/bg (3).gif');
+    width: 128px;
+    height: 21px;
+    background-repeat: no-repeat;
+   }
+.TxtUserCode{ background-image:  url('../image/bg (3-1).gif');
+    width: 80px;
+    height: 21px;
+    background-repeat: no-repeat;
+   }

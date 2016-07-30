@@ -1,0 +1,239 @@
+﻿body
+{
+    border: 0;
+    margin: 0;
+    background-image: url('../images/bg.gif'); background-repeat: repeat;
+ 
+}
+* {margin: 0;padding: 0;border: 0; }
+#big
+{
+    width:1002px;
+    margin:0 auto; 
+    border:2px black solid;
+    
+}
+#pic1
+{
+    background-image: url('../images/bg7.gif');
+    background-repeat: no-repeat;
+    width: 201px;
+    height: 90px;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+#pic2
+{
+    background-image: url('../images/bg8.gif');
+    background-repeat: no-repeat;
+    width: 201px;
+    height: 88px;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+#pic3
+{
+    background-image: url('../images/bg9.png');
+    background-repeat: no-repeat;
+    width: 201px;
+    height: 91px;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+#l
+{
+    width: 1002px;
+    height: 143px;
+    background-image: url('../images/bg1.gif');
+    background-repeat: no-repeat;
+}
+#mid
+{ 
+    width:1002px;
+ }
+
+ #d2 li
+{
+    font-family: 华文楷体;
+    list-style-type: none;
+    list-style-image: url('../images/bg3.gif');
+    padding-left: 10px;
+    margin-left:55px;
+    margin-top: 5px;
+}
+ #d3 li
+{
+   
+    list-style-type: none;
+    list-style-image: url('../images/bg2.gif');
+    padding-left: 10px;
+    margin-left: 50px;
+    margin-top: 10px;
+    width: 80px;
+}
+#logo
+{
+    width: 1002px;
+    background-image: url('../images/bg4.gif');
+    height: 27px;
+}
+#d1 li
+{
+  
+    float: left;
+    display: block;
+    border-left-style: dashed;
+    border-left-width: 2px;
+    border-left-color: #FFFFFF;
+    padding-left: 20px;
+    margin-left: 20px;
+}
+#d1 li a
+{
+    text-decoration: none;
+    padding-left: 20px;
+    font-family: 宋体, Arial, Helvetica, sans-serif;
+    text-decoration: blink;
+    font-size: 24px;
+    color: #FFFFFF;
+    list-style-type: none;
+  
+  
+}
+#d3 li a
+{
+    text-decoration: none;
+    color: #000000;
+    font-size: 18px;
+  font-family: 华文楷体;
+   
+}
+
+#l1
+{
+    width:1002px;
+    height:225px;
+}
+.footer{ clear:none; }
+#right
+{
+    background-image: url('../images/bg6--.gif');
+    width: 250px;
+    height: 300px;
+    float: left;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+#r2
+{
+    float: left;
+    width: 170px;
+    border-style: dotted;
+    border-width: 2px;
+    margin-left:10px;
+    margin-top: 20px;
+    
+}
+#right1
+{
+   width: 170px; 
+}
+a
+{
+    text-decoration: none;
+    color: #0000FF;
+    font-family: 宋体, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+}
+a:link
+{
+    color: #0000FF;
+}
+a:visited
+{
+    color: #808080;
+}
+a:hover
+{
+    color: #FFFFFF;
+}
+a:active
+{
+    color: #FF0000;
+}
+#left
+{
+    float: left;
+    width: 250px;
+    height: 300px;
+    background-image: url('../images/bg6--.gif');
+    margin-left: 20px;
+    margin-top: 20px;
+}
+#middle
+{
+    background-image: url('../images/bg6--.gif');
+    width: 250px;
+    height: 300px;
+    float: left;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+#c
+{
+    clear: left;
+}   
+#pic4
+{
+    background-image: url('../images/bg5.gif');
+    width: 1002px;
+    height: 2px;
+    background-repeat: no-repeat;
+    margin-top: 15px;
+}
+#text2
+{
+    margin-left: 45px;
+    width: 926px;
+    font-size: 14px;
+    line-height: 24px;
+    margin-top: 0px;
+    font-family: 黑体;
+}
+#text1
+{
+    width: 200px;
+    margin-left: 27px;
+    margin-top:5px;
+    font-family: 宋体, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    line-height: 24px;
+}
+
+.img
+{
+    border: none;
+}
+a img,a{outline:0; border:0}
+#l1{font-family: Helvetica, Tahoma, Arial, sans-serif; font-size:14px; line-height:24px; background:#fff;margin:0; padding:0; font-weight:inherit; font-style:inherit; font-size:100%; font-family:inherit; vertical-align:baseline}
+a{text-decoration:none; border:0;}
+a:hover{text-decoration:none;}
+/* 百叶窗banner */
+#slider-wrap{width:1002px; height:225px;}/*可以修改宽高*/
+#slider{position: relative; width:1002px; height:225px; background:#FFF;} /*可以修改宽高*/
+#slider img{position:absolute; top:0; left:0; display:none; width:1002px; height:225px;}/*可以修改宽高*/
+.nivoSlider{position:relative;overflow: hidden;}
+.nivoSlider img{position:absolute; top:0px; left:0px}
+.nivoSlider a.nivo-imageLink{position:absolute; top:0px;display:block;left:0px;width:1002px;height:225px;border:0;padding:0;margin:0;z-index:6;}/*可以修改宽高*/
+.nivo-slice {display:block;position:absolute;z-index:5;height:100%;}
+.nivo-box {display:block;position:absolute;z-index:5;}
+.nivo-caption{position:absolute; left:0; bottom:0; background:#9696F9;width:1002px; z-index:50; height: 225px; }/*可以修改宽高*/
+.nivo-caption p{width:1002px;height: 225px; text-indent: -9999px}/*可以修改宽高*/
+.nivo-controlNav{position:absolute; left:85%; bottom:10px; z-index: 100;}/*可以修改左右上下间距*/
+.nivo-controlNav a{position:relative; z-index:99; cursor:pointer;background:#074d91}
+.nivo-controlNav a.active{background:#ff6400;font-weight:bold}
+.nivo-controlNav a{display:block; color: #fff; width:30px; height:20px; line-height: 20px; text-align: center; margin-right:3px; float:left; overflow: hidden;}/*可以修改宽高*/
+.nivo-directionNav a {position:absolute;top:45%;z-index:9;cursor:pointer;}   /*左右切换按钮，不能删除，如果不需要可以设背景，删除会引起图片错位*/
+.nivo-directionNav a {display:block;width:30px;height:30px;text-indent:-9999px;border:0;}
+a.nivo-nextNav {right:15px;}
+a.nivo-prevNav {left:15px;}
