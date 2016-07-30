@@ -75,7 +75,7 @@ body {
                     <td width="50" height="35"><img src="image/htimage/login_08.gif" width="50"height="35" /></td>
                     <td width="46">
                         <asp:ImageButton ID="ImageButton1" runat="server"  
-                            ImageUrl="~/sw/images/images1/login_09.gif" Width="46px" Height="35px" 
+                            ImageUrl="~/image/htimage/login_09.gif" Width="46px" Height="35px" 
                             BorderWidth="0" onclick="ImageButton1_Click" />
                       </td>
                     <td width="45">
