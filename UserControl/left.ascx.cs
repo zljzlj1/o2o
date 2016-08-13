@@ -13,16 +13,30 @@ using System.Web.UI.HtmlControls;
 
 public partial class UserControl_left : System.Web.UI.UserControl
 {
-    /*UserInfoClass ucObj = new UserInfoClass();
+    DBAccess1 DBA = new DBAccess1();
+  
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
         {
-            ucObj.DLClassBind(DLClass);
+            DCGIBind();
+
         }
     }
-    protected void DLClass_EditCommand(object source, DataListCommandEventArgs e)
+    public void DCGIBind()
     {
-        Response.Redirect("~/User/ClassGoods.aspx?ClassID=" + DLClass.DataKeys[e.Item.ItemIndex].ToString());
-    }*/
+
+        string strSQL = "select * from Splb";
+        DataSet ds = DBA.GetDataSet(strSQL);
+        Splb.DataSource = ds.Tables["datatable"].DefaultView;
+        Splb.DataBind();
+       
+       
+
+    }
+   
+    protected void Splb_EditCommand(object source, DataListCommandEventArgs e)
+    {
+        Response.Redirect("~/ClassGoods.aspx? splbid=" + Splb.DataKeys[e.Item.ItemIndex].ToString());
+    }
 }

@@ -10,64 +10,89 @@ using System.Collections;
 using System.Web.Security;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
+using System.Data.OleDb;
+
+
+
+
 
 public partial class UserControl_LoginControl : System.Web.UI.UserControl
 {
-   /*
-   DBClass dbObj = new DBClass();
-    UserInfoClass uiObj = new UserInfoClass();
-*/
+  
+    DBAccess1 DBA = new DBAccess1();
     protected void Page_Load(object sender, EventArgs e)
     {
         TxtUserCode.BackColor = System.Drawing.Color.Transparent;
         TxtUserPwd.BackColor = System.Drawing.Color.Transparent;
         TxtUserName.BackColor = System.Drawing.Color.Transparent;
-       /* if (!IsPostBack)
+       if (!IsPostBack)
         {
-            //lbCode.Text = new randomCode().RandomNum(4);//产生验证码
-            if (Session["UID"] != null)
+
+            if (Session["UserID"] != null)
             {
                 table2.Visible = true;
                 table1.Visible = false;
                 this.lbUserName.Text = Session["Username"].ToString();
             }
-        }*/
+
+            if (Session["Username"] != null)
+            {
+                table2.Visible = true;
+                table1.Visible = false;
+                this.lbUserName.Text = Session["Username"].ToString();
+            }
+        }
     }
+
+
+
     protected void btLogin_Click(object sender, ImageClickEventArgs e)
     {
-        /*
-        Session["UID"] = null;
+
+        Session["UserID"] = null;
         Session["Username"] = null;
-        if (TxtUserName.Text.Trim() == "" || TxtUserPwd.Text.Trim() == "")
+        string usercode = TxtUserCode.Text.Trim();
+    if (TxtUserName.Text.Trim() == "" || TxtUserPwd.Text.Trim() == "")
         {
             Response.Write("<script>alert('登录名和密码不能为空！');location='javascript:history.go(-1)';</script>");
         }
+
+    else if (usercode != Session["iCode"].ToString())
+        { Response.Write("<script>alert('请输入正确的验证码！！');location='javascript:history.go(-1)';</script>"); }
         else
         {
-            if (TxtUserCode.Text.Trim().CompareTo(lbValid.ImageUrl.ToString()) == 1)
+           
+
+            string strUid = TxtUserName.Text.Trim();
+            string strPwd = TxtUserPwd.Text.Trim();
+            string SQLStr = " select Username,UserID from [User] where Username='" + strUid + "' and mm='" + strPwd + "' ";
+           
+            OleDbDataReader dr = DBA.GetDataReader(SQLStr);
+            if (dr.Read())
             {
-                int p_Int_IsExists = uiObj.UserExists(TxtUserName.Text.Trim(), TxtUserPwd.Text.Trim());
-                if (p_Int_IsExists == 100)
-                {
-                    DataSet ds = uiObj.ReturnUIDs(TxtUserName.Text.Trim(), TxtUserPwd.Text.Trim(), "UserInfo");
-                    Session["UID"] = Convert.ToInt32(ds.Tables["UserInfo"].Rows[0][0].ToString());
-                    Session["Username"] = ds.Tables["UserInfo"].Rows[0][1].ToString();
-                    Response.Redirect("index.aspx");
-                }
-                else
-                {
-                    Response.Write("<script>alert('您的登录有误，请核对后再重新登录!');location='javascript:history.go(-1)';</script>");
-                }
+               
+                Session["UserID"] = dr["UserID"].ToString(); 
+                Session["Username"] = strUid;
+                Response.Write("<script>alert('登录成功！');location='index.aspx';</script>");
+             
             }
             else
             {
-                Response.Write("<script>alert('请正确输入验证码！');location='javascript:history.go(-1)';</script>");
+               
+                Response.Write("<script>alert(' 登录失败，用户不存在或者输入错误！');location='javascript:history.go(-1)';</script>");
             }
-        }*/
-    }
+        
+        }
+       
+       
+        
+        
+   
+        }
+    
     protected void btRegister_Click(object sender, ImageClickEventArgs e)
     {
-       // Response.Redirect("Register.aspx");
+         Response.Redirect("zhuce.aspx");
     }
     
 }

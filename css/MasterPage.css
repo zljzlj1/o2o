@@ -3,8 +3,7 @@
 a,img{border:0;     text-decoration: none;}
 .ul, li{padding: 0px;margin: 0px;border-width: 0px;}
 
-body {
-}
+body { }
 .TxtUserName{ background-image:  url('../image/bg (3).gif');
     width: 128px;
     height: 21px;
@@ -15,3 +14,17 @@ body {
     height: 21px;
     background-repeat: no-repeat;
    }
+   
+.dao ul li{ float:left; }
+.dao ul li{height: 47px;   }
+.dao ul li a{width:100px;padding-left:60px; padding-right:60px; position :relative; top:-10px;  font-family: 宋体, Arial, Helvetica, sans-serif; font-size: 24px;  color: #FFFFFF; height: 47px; line-height:47px;  }
+.dao  ul{ height: 47px;  margin-left:100px; }
+.dao{ position :relative;  }
+/*zche border: 1px solid #E8E8E8;.tablexian td{ height:30px;}*/
+.tablexian{ margin-top:0px; font-size:12px;}
+.s{ border: Silver 1px solid;  }
+  .styled { border-radius:5px; width:100px; height:25px; padding:0 0px 0 0px;color:#fff;background-color:#3d69f7; font:14px "微软雅黑"; } 
+
+
+
+

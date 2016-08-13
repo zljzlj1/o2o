@@ -12,84 +12,68 @@ public partial class sw_logn : System.Web.UI.Page
     DBAccess1 DBA = new DBAccess1();
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["UserName"] != null||Session["name"]!=null)
-        {
-            ClientScript.RegisterStartupScript(ClientScript.GetType(), "alert", "<script>alert('用户已登录，请退出后再进行操作!');location.href= 'index.aspx ' ; </script>");
-        }
+      
        
     }
     protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
     {
+        Session["adminname"] = null;
+        Session["time"] = null;
+         string usercode = TextBox3.Text.Trim();
+         if (TextBox1.Text == "" || TextBox2.Text == "")//判断用户名或者密码是否为空
+         {
+             ClientScript.RegisterStartupScript(ClientScript.GetType(), "alert", " <script> alert('登录名和密码不能为空！');</script> ");
+         }
+      
+        else if (usercode != Session["iCode"].ToString())
+         {
+             ClientScript.RegisterStartupScript(ClientScript.GetType(), "alert", " <script> alert('请输入正确的验证码！！');</script> ");
+           
+         }
+         else
+         {
+             string strUid = TextBox1.Text.Trim();
+             string strPwd = TextBox2.Text.Trim();
+             string SQLStr = " select * from Admin where adminname='" + strUid + "' and admm='" + strPwd + "'";
+             OleDbDataReader dr = DBA.GetDataReader(SQLStr);
+             if (dr.Read())
+             {
+                 Session["adminid"] = dr["adminid"].ToString();
+                 Session["adminname"] = strUid;
+                 Session["bz"] = dr["bz"].ToString();
+                 string vadminid = dr["adminid"].ToString();
+                 string vlogintime = dr["logintime"].ToString(); 
+                
+                 if (vlogintime == null || vlogintime == "")
+                 {
+                     Session["time"] = DateTime.Now.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss");
+                     string sql = "update Admin set logintime='" + Session["time"] + "'where adminid= '" + vadminid + "'";
+                     DBA.ExeSql(sql);
+                 }
+                 else
+                 {
+                     string sql = "update Admin set sctime='" + vlogintime + "'where adminid= '" + vadminid + "'";
+                     DBA.ExeSql(sql);
 
-       /* if (TextBox1.Text == "" || TextBox0.Text == "")//判断用户名或者密码是否为空
-        {
-            ClientScript.RegisterStartupScript(ClientScript.GetType(), "alert", " <script> alert('没有输入！');</script> ");
-        }
-        string usercode = txtcode.Text.Trim();
-        if (usercode != Session["iCode"].ToString())
-        {
-            ClientScript.RegisterStartupScript(ClientScript.GetType(), "alert", " <script> alert('验证码错误！');</script> ");
-            TextBox0.Text = "";
-        }
-        else
-        {
-            string strUid = TextBox1.Text.Trim();//把用户输入的用户名赋值给strUser
-            string strPwd = TextBox0.Text.Trim();//把用户输入的密码赋值给strPwd
-            string SQLStr = " select * from Users where UserName='" + strUid + "' and Password='" + strPwd + "' and RoleID!='1'";
-            OleDbDataReader dr = DBA.GetDataReader(SQLStr);
-            if (dr.Read())
-            {
-                Session["UserName"] = strUid;
-                Session["UserID"] = dr["UserID"].ToString();
-                Session["IsSysRole"] = dr["IsSysRole"].ToString();
-                ClientScript.RegisterStartupScript(ClientScript.GetType(), "alert", " <script> alert('登录成功！');location.href= 'admin/houtai.aspx'; </script> ");
-            }
-            else
-            {
-                ClientScript.RegisterStartupScript(ClientScript.GetType(), "alert", " <script> alert('登录失败，用户不可登录或者输入错误！'); </script> ");
-            }
-        }
+                     Session["time"] = DateTime.Now.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss");
+                     string sqll = "update Admin set logintime='" + Session["time"] + "'where adminid= '" + vadminid + "'";
+                     DBA.ExeSql(sqll);
+                 }
+
+
+                 TextBox1.Text = "";
+                 TextBox2.Text = "";
+                 TextBox3.Text = "";
+                 ClientScript.RegisterStartupScript(ClientScript.GetType(), "alert", " <script> alert('登录成功！');location.href= 'admin/admin-sy.aspx'; </script> ");
+               }
+             else
+             {
+                 ClientScript.RegisterStartupScript(ClientScript.GetType(), "alert", " <script> alert('登录失败，用户不可登录或者输入错误！'); </script> ");
+             }
+         }
         
-        string strUser = TextBox1.Text;
-        string strPwd = TextBox2.Text;
+        
+         }
 
-        string SQLStr = "SELECT * FROM 用户 Where 用户名='" + strUser + "' and 密码 = '" + strPwd + "'";
-        OleDbDataReader dr = DBA.GetDataReader(SQLStr);
-
-        if (dr.Read())
-        {
-          string flag = dr["管理员标志"].ToString();
-            if (flag == "True")
-            {
-               
-               
-                    Session["UserName"] = strUser;
-                    ClientScript.RegisterStartupScript(ClientScript.GetType(), "alert", " <script> alert('管理员登录成功！');location='houtai.aspx';</script> ");
-              
-             
-                
-            }
-            else
-            {
-                
-                    Session["UserName"] = strUser;
-                    ClientScript.RegisterStartupScript(ClientScript.GetType(), "alert", " <script> alert('用户登录成功！');location='index.aspx';</script> ");
-               
-            }
-          
-
-        }
-        else
-        {
-            if (strUser == "" || strPwd == "")
-            {
-                ClientScript.RegisterStartupScript(ClientScript.GetType(), "alert", "<script>alert('管理员或用户或密码不能为空!');</script>");
-            }
-            else
-            {
-                ClientScript.RegisterStartupScript(ClientScript.GetType(), "alert", "<script>alert('管理员或用户不存在或密码错误!');</script>");
-            }
-        }*/
-
-    }
+    
 }

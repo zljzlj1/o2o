@@ -22,7 +22,7 @@
                 style="width: 390px; height: 176px; ">
                 <tr>
                     <td align="center" colspan="2">
-                        <span style="font-size: 10pt; font-family: 黑体;">用户登录</span></td>
+                        <span style="font-size: 12pt; font-family: 黑体;">用户登录</span></td>
                 </tr>
                 <tr>
                     <td align="right" style="width: 319px">
@@ -48,7 +48,9 @@
                             ><span style="font-family: 方正舒体; font-size: medium">验证码</span></td>
                     <td style="width: 993px; height: 36px">
                         <asp:TextBox ID="TxtUserCode" runat="server" Width="80px"  CssClass="TxtUserCode"></asp:TextBox>&nbsp;
-                        <asp:Image ID="lbValid" runat="server" ImageUrl="~/ValidateCode.aspx" alt="若看不清,点击更换一张!!" onclick="this.src='ValidateCode.aspx?'+Math.random()" />
+                        <asp:Image ID="lbValid" runat="server" ImageUrl="~/ValidateCode.aspx" 
+                            alt="若看不清,点击更换一张!!" onclick="this.src='ValidateCode.aspx?'+Math.random()" 
+                            />
              
                             </td>
                 </tr>
@@ -98,12 +100,16 @@
                 ForeColor="Black" NavigateUrl="~/User/UpdateMember.aspx">个人基本信息</asp:HyperLink>
             <br />                 <asp:HyperLink ID="Hyperwdcc" runat="server" 
                 Font-Size="Small"  Font-Names="楷体" Font-Underline="False" 
-                ForeColor="Black" NavigateUrl="~/wdcz.aspx">我的村庄/社区</asp:HyperLink>
+                ForeColor="Black" NavigateUrl="~/wdcz.aspx">我的村庄/社区</asp:HyperLink><br />
+                         <asp:HyperLink ID="HyperLinkbdsp" runat="server" 
+                Font-Size="Small"  Font-Names="楷体" Font-Underline="False" 
+                ForeColor="Black" NavigateUrl="~/wdcz.aspx">本地商品</asp:HyperLink>
   <br />     
 <asp:HyperLink ID="hpLinkChangePwd" runat="server" Font-Size="Small"  Font-Names="楷体" Font-Underline="False" 
                 ForeColor="Black" NavigateUrl="~/User/ChangePwd.aspx">修改密码</asp:HyperLink><br />
-            <asp:HyperLink ID="hpLinkLoginOut" runat="server" Font-Size="Small"  Font-Names="楷体" Font-Underline="False" 
-                ForeColor="Black" NavigateUrl="~/User/OutLogin.aspx">退出</asp:HyperLink></td>
+            <asp:HyperLink ID="hpLinkLoginOut" runat="server" Font-Size="Small"  
+                Font-Names="楷体" Font-Underline="False" 
+                ForeColor="Black" NavigateUrl="~/tuichu.aspx">退出</asp:HyperLink></td>
 
     </tr>
     

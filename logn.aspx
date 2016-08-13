@@ -53,7 +53,7 @@ body {
                <table  width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
                    <td style="width: 45%"> <asp:TextBox ID="TextBox3" runat="server" 
                            BackColor="#32A2E3" Height="20px" 
-                                Width="55px"  Font-Size="12" BorderStyle="Solid" BorderWidth="1" 
+                                Width="60px"  Font-Size="12" BorderStyle="Solid" BorderWidth="1" 
                            BorderColor="#0468A7" ForeColor="#14649F" CausesValidation="True"></asp:TextBox></td>
                                 <td style="width: 55%"> 
                                   

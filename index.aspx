@@ -4,12 +4,6 @@
     <link href="css/MasterPage.css" rel="Stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-   hhh
-  
-  
-  
-  
- 
-  
+
   </asp:Content>
 

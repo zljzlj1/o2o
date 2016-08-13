@@ -12,8 +12,13 @@ body {
 .lava_with_image li a:hover{text-decoration:none; color:white;}
 .lava_with_image li.back{height:30px; background:url(../image/lava_menu_bg.gif) no-repeat right -30px; position:absolute; z-index:2;}
 .lava_with_image li.back .left{height:100%; margin-right:9px; background:url(../image/lava_menu_bg.gif) no-repeat;}
-.zxx_test_list{width:720px; margin-top:100px; margin-left:auto; margin-right:auto;}
+.zxx_test_list{width:720px; margin-top:20px; margin-left:auto; margin-right:auto;}
 .zxx_test_list{border-bottom:0; padding-bottom:40px;}
+
+
+
+
+
 /* 百叶窗banner */
 #slider-wrap{width:1000px; height:277px;}/*可以修改宽高*/
 #slider{position: relative; width:1000px; height:277px; background:#FFF;} /*可以修改宽高*/
