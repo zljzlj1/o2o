@@ -33,21 +33,50 @@ a {
 	
 	<script type="text/javascript">
 	    $(function () {
+	        getCommentList();
+	    });
+	    function getCommentList() {
 	        $.ajax({
 	            type: "POST", //要用post方式
 	            //data: "{str1:{str:1,str2:'asdasd'}}",
+	            //"{str:我是,str2:XXX}"
+	            data: "{txtid: 2}",
 	            url: "Comment.aspx/getCommentList", //方法所在页面和方法名
 	            contentType: "application/json; charset=utf-8",
 	            dataType: "json",
 	            success: function (data) {
-	                // kk(data.d);
-	                alert(data.d);
+	                kk(data.d);
 	            },
 	            error: function (err) {
 	                alert("发生错误");
 	            }
 	        });
-	    });
+	    }
+	    function setCommentList(last) {
+	        $.ajax({
+	            type: "POST", //要用post方式
+	            //data: "{str1:{str:1,str2:'asdasd'}}",
+	            //"{str:我是,str2:XXX}"
+	            data: last,
+	            url: "Comment.aspx/setComment", //方法所在页面和方法名
+	            contentType: "application/json; charset=utf-8",
+	            dataType: "json",
+	            success: function (data) {
+	                if (data.d.result == true) {
+	                    // $("#articleComment").zyComment("setCommentAfter", data.d.data);
+	                    $("#commentItems").remove();
+	                    $("#commentFrom").remove();
+	                    getCommentList();
+
+	                } else {
+	                    alert(data.d.msg)
+	                }
+	            },
+	            error: function (err) {
+	                alert("发生错误");
+	            }
+	        });
+        }
 	    function kk(agoComment) {
 	        $("#articleComment").zyComment({
 	            "width": "355",
@@ -56,15 +85,24 @@ a {
 	            "callback": function (comment) {
 	                console.info("填写内容返回值：");
 	                console.info(comment);
-
-	                // 添加新的评论
-	                //$("#articleComment").zyComment("setCommentAfter", { "id": 123, "name": "userNam", "content": "comment", "time": "2014-04-14" });
+	                if (comment.yhpl == '' || comment.yhpl == null) {
+	                    alert("评论内容不能为空");
+	                }
+	                else {
+	                    var last = JSON.stringify(comment); //将JSON对象转化为JSON字符
+	                    // 添加新的评论
+	                    //$("#articleComment").zyComment("setCommentAfter", { "wzplid": 123, "plyhid": "userNam", "yhpl": "comment", "plsj": "2014-04-14" });
+	                    setCommentList(last)
+	                }
 	            }
 	        });
 	    }
+
 	</script>
 
 <div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
+</div>
+<div id="TextComment" style="margin-bottom:20px;">
 </div>
 </body>
 </html>

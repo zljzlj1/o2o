@@ -32,11 +32,12 @@ namespace Maticsoft.Dao
             return className;
         }
         DBAccess1 DBA = new DBAccess1();
-        public List<Maticsoft.Model.Txtplb> searchbymodel(Maticsoft.Model.Txtplb model, string orderby, string option)
+
+        public DataSet searchbymodel(Maticsoft.Model.Txtplb model, string orderby, string option)
         {
             StringBuilder strSql = new StringBuilder();
             Util dbc = new Util();
-            strSql.Append("select * from " + GetTablename() + " where ");
+            strSql.Append("select * from " + GetTablename() + " where 1=1 ");
             string s = "";
             if (model != null)
             {
@@ -68,31 +69,63 @@ namespace Maticsoft.Dao
                 {
                     strSql = dbc.optiontosql(strSql, "sortid", model.sortid.ToString(), option);
                 }
-                s = strSql.ToString().Remove(strSql.Length - 5);
             }
-            else
+            s = strSql.ToString();
+            if (orderby != null && orderby != "")
             {
-                s = strSql.ToString().Remove(strSql.Length - 7);
+                string[] a = orderby.Split('.');
+               s = s + " order by " + a[0].ToString() + " " + a[1].ToString();
             }
-            //if (orderby != null && orderby != "")
-            //{
-            //    string[] a = orderby.Split('.');
-            //    s = s + " order by " + a[0].ToString() + " " + a[1].ToString();
-            //}
-            DataSet ds = DBA.GetDataSet(s.ToString());
-            int count = ds.Tables[0].Rows.Count;
-            if (count > 0)
-            {
-                List<Maticsoft.Model.Txtplb> list = new List<Model.Txtplb>();
-                for (int i = 0; i < count; i++)
-                {
-                    list.Add(DataRowToModel(ds.Tables[0].Rows[i]));
-                }
-                return list;
-            }
-            return null;
+            return DBA.GetDataSet(s.ToString());
         }
-
+        public int insertmodel(Maticsoft.Model.Txtplb model)
+        {
+            StringBuilder strSql = new StringBuilder();
+            StringBuilder strSql1 = new StringBuilder();
+            StringBuilder strSql2 = new StringBuilder();
+            if (model.wzplid != null && model.wzplid.ToString() != "" && model.wzplid != 0)
+            {
+                strSql1.Append("wzplid,");
+                strSql2.Append("'" + model.wzplid + "',");
+            }
+            if (model.yhpl != null && model.yhpl.ToString() != "")
+            {
+                strSql1.Append("yhpl,");
+                strSql2.Append("'" + model.yhpl + "',");
+            }
+            if (model.plsj != null && model.plsj.ToString() != "")
+            {
+                strSql1.Append("plsj,");
+                strSql2.Append("'" + model.plsj + "',");
+            }
+            if (model.plyhid != null && model.plyhid.ToString() != "" && model.plyhid != 0)
+            {
+                strSql1.Append("plyhid,");
+                strSql2.Append("'" + model.plyhid + "',");
+            }
+            if (model.toplyhid != null && model.toplyhid.ToString() != "" && model.toplyhid != 0)
+            {
+                strSql1.Append("toplyhid,");
+                strSql2.Append("'" + model.toplyhid + "',");
+            }
+            if (model.txtid != null && model.txtid.ToString() != "" && model.txtid != 0)
+            {
+                strSql1.Append("txtid,");
+                strSql2.Append("'" + model.txtid + "',");
+            }
+            if (model.sortid != null && model.sortid.ToString() != "" && model.sortid != 0)
+            {
+                strSql1.Append("sortid,");
+                strSql2.Append("'" + model.sortid + "',");
+            }
+            strSql.Append("insert into " + GetTablename() + "(");
+            strSql.Append(strSql1.ToString().Remove(strSql1.Length - 1));
+            strSql.Append(")");
+            strSql.Append(" values (");
+            strSql.Append(strSql2.ToString().Remove(strSql2.Length - 1));
+            strSql.Append(")");
+            return DBA.ExeSqlRows(strSql.ToString());
+        }
         /// <summary>
         /// 得到一个对象实体
         /// </summary>

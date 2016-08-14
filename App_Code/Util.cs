@@ -34,16 +34,16 @@ public class Util
     /// <returns></returns>
     public StringBuilder optiontosql(StringBuilder strSql, string fieldname, string fieldvalue, string option)
     {
-
         if (option == "=")
         {
-            strSql.Append(fieldname + "='" + fieldvalue + "' and ");
+            return strSql.Append(" and " + fieldname + "='" + fieldvalue + "'");
         }
         else if (option == "like")
         {
-            strSql.Append(fieldname + " like '%" + fieldvalue + "%' and ");
+            return strSql.Append(" and " + fieldname + " like '%" + fieldvalue + "%'");
         }
-        return strSql;
+        //默认是精确查询
+        return strSql.Append(" and " + fieldname + "='" + fieldvalue + "'");
     }
     #endregion
 }

@@ -55,38 +55,42 @@
                     if (k > 0) {
                         topStyle = "topStyle";
                     }
-
                     var item = '';
-                    item += '<div id="comment' + v.id + '" class="comment">';
+                    item += '<div id="comment' + v.wzplid + '" class="comment">';
+                    //item += '  <input id="hidewzplid ' + v.wzplid + '" name="hidewzplid" type="hidden" value=' + v.wzplid + ' />';
                     item += '	<a class="avatar">';
-                    item += '		<img src="images/foot.png">';
+                    item += '		<img src="image/foot.png">';
                     item += '	</a>';
                     item += '	<div class="content ' + topStyle + '">';
-                    item += '		<a class="author"> ' + v.userName + ' </a>';
+                    if (v.sortid == 0) {
+                        item += '		<a class="author"> ' + v.plyhidstr + ' </a>';
+                    } else {
+                        item += '		<a class="author"> ' + v.plyhidstr + '    回复  ' + v.toplyhidstr + '</a>';
+                    }
                     item += '		<div class="metadata">';
-                    item += '			<span class="date"> ' + v.time + ' </span>';
+                    item += '			<span class="date"> ' + v.plsj + ' </span>';
                     item += '		</div>';
-                    item += '		<div class="text"> ' + v.content + ' </div>';
+                    item += '		<div class="text"> ' + v.yhpl + ' </div>';
                     item += '		<div class="actions">';
-                    item += '			<a class="reply" href="javascript:void(0)" selfID="' + v.id + '" >回复</a>';
+                    item += '			<a class="reply" href="javascript:void(0)" selfID="' + v.wzplid + '" >回复</a>';
                     item += '		</div>';
                     item += '	</div>';
                     item += '</div>';
-
+                    var wzplid = v.wzplid;
                     // 判断此条评论是不是子级评论
-                    if (v.sortID == 0) {  // 不是
+                    if (v.sortid == 0) {  // 不是
                         $("#commentItems").append(item);
                     } else {  // 否
                         // 判断父级评论下是不是已经有了子级评论
-                        if ($("#comment" + v.sortID).find(".comments").length == 0) {  // 没有
+                        if ($("#comment" + v.sortid).find(".comments").length == 0) {  // 没有
                             var comments = '';
-                            comments += '<div id="comments' + v.sortID + '" class="comments">';
+                            comments += '<div id="comments' + v.sortid + '" class="comments">';
                             comments += item;
                             comments += '</div>';
 
-                            $("#comment" + v.sortID).append(comments);
+                            $("#comment" + v.sortid).append(comments);
                         } else {  // 有
-                            $("#comments" + v.sortID).append(item);
+                            $("#comments" + v.sortid).append(item);
                         }
                     }
                 });
@@ -107,16 +111,6 @@
                 var boxHtml = '';
                 boxHtml += '<form id="replyBoxAri" class="ui reply form">';
                 boxHtml += '	<div class="ui large form ">';
-                boxHtml += '		<div class="two fields">';
-                boxHtml += '			<div class="field" >';
-                boxHtml += '				<input type="text" id="userName" />';
-                boxHtml += '				<label class="userNameLabel" for="userName">Your Name</label>';
-                boxHtml += '			</div>';
-                boxHtml += '			<div class="field" >';
-                boxHtml += '				<input type="text" id="userEmail" />';
-                boxHtml += '				<label class="userEmailLabel" for="userName">E-mail</label>';
-                boxHtml += '			</div>';
-                boxHtml += '		</div>';
                 boxHtml += '		<div class="contentField field" >';
                 boxHtml += '			<textarea id="commentContent"></textarea>';
                 boxHtml += '			<label class="commentContentLabel" for="commentContent">Content</label>';
@@ -158,11 +152,10 @@
                 // 绑定回复按钮点击事件
                 $(self).find(".actions .reply").live("click", function () {
                     // 设置当前回复的评论的id
-                    fCode = $(this).attr("selfid");
-
+                    fCode = $(this).attr("selfID");
                     // 1.移除之前的取消回复按钮
                     $(self).find(".cancel").remove();
-
+                    
                     // 2.移除所有回复框
                     self.removeAllCommentFrom();
 
@@ -175,12 +168,18 @@
                     // 绑定提交事件
                     $("#publicComment").die("click");
                     $("#publicComment").live("click", function () {
-                        var result = {
-                            "name": $("#userName").val(),
-                            "email": $("#userEmail").val(),
-                            "content": $("#commentContent").val()
-                        };
-                        para.callback(result);
+                            var result = {
+                                "sortid": fCode,
+                                "yhpl": $("#commentContent").val()
+                            };
+                            para.callback(result);
+                            // 1.移除之前的取消回复按钮
+                            $(self).find(".cancel").remove();
+                            // 2.移除所有回复框
+                            self.removeAllCommentFrom();
+
+                            // 3.添加根下的回复框
+                            self.addRootCommentFrom();
                     });
                 });
 
@@ -235,12 +234,19 @@
                 // 绑定提交事件
                 $("#submitComment").die("click");
                 $("#submitComment").live("click", function () {
+                    //data: "{txtid: 2}",
                     var result = {
-                        "name": $("#userName").val(),
-                        "email": $("#userEmail").val(),
-                        "content": $("#commentContent").val()
+                        "sortid": 0,
+                        "yhpl": $("#commentContent").val()
                     };
                     para.callback(result);
+                    // 1.移除之前的取消回复按钮
+                    $(self).find(".cancel").remove();
+                    // 2.移除所有回复框
+                    self.removeAllCommentFrom();
+
+                    // 3.添加根下的回复框
+                    self.addRootCommentFrom();
                 });
             };
 
@@ -263,16 +269,6 @@
                 var boxHtml = '';
                 boxHtml += '<form id="replyBox" class="ui reply form">';
                 boxHtml += '	<div class="ui  form ">';
-                //boxHtml += '		<div class="two fields">'
-                boxHtml += '			<div class="field" >';
-                boxHtml += '				<input type="text" id="userName" />';
-                boxHtml += '				<label class="userNameLabel" for="userName">Your Name</label>';
-                boxHtml += '			</div>';
-                boxHtml += '			<div class="field" >';
-                boxHtml += '				<input type="text" id="userEmail" />';
-                boxHtml += '				<label class="userEmailLabel" for="userName">E-mail</label>';
-                boxHtml += '			</div>';
-                //boxHtml += '		</div>';
                 boxHtml += '		<div class="contentField field" >';
                 boxHtml += '			<textarea id="commentContent"></textarea>';
                 boxHtml += '			<label class="commentContentLabel" for="commentContent">Content</label>';
@@ -294,16 +290,6 @@
                 var boxHtml = '';
                 boxHtml += '<form id="replyBoxAri" class="ui reply form">';
                 boxHtml += '	<div class="ui large form ">';
-                boxHtml += '		<div class="two fields">';
-                boxHtml += '			<div class="field" >';
-                boxHtml += '				<input type="text" id="userName" />';
-                boxHtml += '				<label class="userNameLabel" for="userName">Your Name</label>';
-                boxHtml += '			</div>';
-                boxHtml += '			<div class="field" >';
-                boxHtml += '				<input type="text" id="userEmail" />';
-                boxHtml += '				<label class="userEmailLabel" for="userName">E-mail</label>';
-                boxHtml += '			</div>';
-                boxHtml += '		</div>';
                 boxHtml += '		<div class="contentField field" >';
                 boxHtml += '			<textarea id="commentContent"></textarea>';
                 boxHtml += '			<label class="commentContentLabel" for="commentContent">Content</label>';
@@ -342,20 +328,18 @@
                 }
 
                 var item = '';
-                item += '<div id="comment' + param.id + '" class="comment">';
+                item += '<div id="comment' + param.wzplid + '" class="comment">';
                 item += '	<a class="avatar">';
                 item += '		<img src="images/foot.png">';
                 item += '	</a>';
                 item += '	<div class="content ' + topStyle + '">';
-                item += '		<a class="author"> ' + param.name + ' </a>';
+                item += '		<a class="author"> ' + param.plyhid + ' </a>';
                 item += '		<div class="metadata">';
-                item += '			<span class="date"> ' + param.time + ' </span>';
+                item += '			<span class="date"> ' + param.plsj + ' </span>';
                 item += '		</div>';
-                item += '		<div class="text"> ' + param.content + ' </div>';
+                item += '		<div class="text"> ' + param.yhpl + ' </div>';
                 item += '		<div class="actions">';
-                if (parseInt(fCode) == 0) {  // 如果对根添加
-                    item += '			<a class="reply" href="javascript:void(0)" selfID="' + param.id + '" >回复</a>';
-                }
+                item += '			<a class="reply" href="javascript:void(0)" selfID="' + param.wzplid + '" >回复</a>';
                 item += '		</div>';
                 item += '	</div>';
                 item += '</div>';

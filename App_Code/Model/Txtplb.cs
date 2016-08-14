@@ -82,7 +82,18 @@ namespace Maticsoft.Model
             get { return _wzplid; }
             set { _wzplid = value; }
         }
-       
+        public Maticsoft.ToModel.Txtplb ModelToModel(Maticsoft.Model.Txtplb txtplb)
+        {
+            Maticsoft.ToModel.Txtplb totxtplb = new Maticsoft.ToModel.Txtplb();
+            totxtplb.plyhid = txtplb.plyhid;
+            totxtplb.toplyhid = txtplb.toplyhid;
+            totxtplb.txtid = txtplb.txtid;
+            totxtplb.sortid = txtplb.sortid;
+            totxtplb.plsj = txtplb.plsj;
+            totxtplb.wzplid = txtplb.wzplid;
+            totxtplb.yhpl = txtplb.yhpl;
+            return totxtplb;
+        }
         #endregion Model
 
     }
