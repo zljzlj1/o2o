@@ -64,8 +64,7 @@ a {
 	            success: function (data) {
 	                if (data.d.result == true) {
 	                    // $("#articleComment").zyComment("setCommentAfter", data.d.data);
-	                    $("#commentItems").remove();
-	                    $("#commentFrom").remove();
+	                    $("#articleComment").empty();
 	                    getCommentList();
 
 	                } else {
@@ -76,6 +75,9 @@ a {
 	                alert("发生错误");
 	            }
 	        });
+	    }
+	    function replay(bu) {
+	        replyClickEvent();
         }
 	    function kk(agoComment) {
 	        $("#articleComment").zyComment({
@@ -102,7 +104,6 @@ a {
 
 <div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
 </div>
-<div id="TextComment" style="margin-bottom:20px;">
-</div>
+
 </body>
 </html>

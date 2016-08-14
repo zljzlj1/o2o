@@ -67,6 +67,7 @@ public partial class Comment : System.Web.UI.Page
         Maticsoft.Service.Txtplb txtplbService = new Maticsoft.Service.Txtplb();
         if (UserID != null)
         {
+            
             if (sortid != null)
             {
                 int sortId = int.Parse(sortid);
@@ -89,6 +90,11 @@ public partial class Comment : System.Web.UI.Page
                     Maticsoft.Model.Txtplb txtplbmodel = new Maticsoft.Model.Txtplb();
                     txtplbmodel.wzplid = int.Parse(sortid);
                     Maticsoft.Model.Txtplb txtplb = txtplbService.searchTxtplbbymodel(txtplbmodel);
+                    if (int.Parse(UserID) == txtplb.plyhid) {
+                        data.Add("result", false);
+                        data.Add("msg", "不能评论自己的内容");
+                        return data;
+                    }
 
                     model.plyhid = int.Parse(UserID);
                     model.toplyhid = txtplb.plyhid;
@@ -99,9 +105,10 @@ public partial class Comment : System.Web.UI.Page
                     model.txtid = 2;
                     txtplbService.insertmodel(model);
                 }
+                data.Add("result", true);
+                data.Add("msg", "评论成功");
             }
-            data.Add("result", true);
-            data.Add("msg", "评论成功");
+            
         }
         else
         {
